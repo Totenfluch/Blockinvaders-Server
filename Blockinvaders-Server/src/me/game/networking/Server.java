@@ -36,7 +36,7 @@ public class Server implements Runnable
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			Server.reply(s, ""/* Send Lobby List */);
+			Server.reply(s, CheckMessage.LobbysToSendString());
 
 			outputStreams.put( s, dout );
 
@@ -70,6 +70,18 @@ public class Server implements Runnable
 			e.printStackTrace();
 		}
 	}
+	
+	public static void sendToAllUsersInLobby(String lobby, String message){
+		for(Socket socket : CheckMessage.getUserFromLobby(lobby)){
+			DataOutputStream dout;
+			try {
+				dout = new DataOutputStream( socket.getOutputStream() );
+				dout.writeUTF(message);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	void removeConnection( Socket s ) {
 		synchronized( outputStreams ) {
@@ -83,7 +95,9 @@ public class Server implements Runnable
 				ie.printStackTrace();
 				System.out.println("Error closing connection");
 			}
-
+			try{
+				CheckMessage.removeUserFromLobbys(s);
+			}catch(Exception e){};
 			if(CheckMessage.Usernames.containsKey(s)){
 				CheckMessage.Usernames.remove(s);
 			}
