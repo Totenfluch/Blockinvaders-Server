@@ -91,10 +91,7 @@ public class Server implements Runnable
 				if(outputStreams.contains(s.toString())){
 					outputStreams.remove(s);
 				}
-			} catch( IOException ie ) {
-				ie.printStackTrace();
-				System.out.println("Error closing connection");
-			}
+			} catch( IOException ie ) {}
 			try{
 				CheckMessage.removeUserFromLobbys(s);
 			}catch(Exception e){};

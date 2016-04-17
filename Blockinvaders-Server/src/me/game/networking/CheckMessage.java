@@ -13,11 +13,11 @@ public class CheckMessage {
 	public static void ParseMessage(Socket socket, String[] args, String FullMsg){
 		if(FullMsg.startsWith("createLobby") && args.length > 1){
 			if(CreateLobby(args[1], socket)){
-				Server.reply(socket, LobbysToSendString());
 				Server.reply(socket, "setLobby " + args[1]);
 			}else{
 				Server.reply(socket, "setLobbyFailed");
 			}
+			Server.sendToAll(LobbysToSendString());
 		}else if(FullMsg.startsWith("joinLobby") && args.length > 1){
 			if(addUserToLobby(args[1], socket)){
 				Server.reply(socket, "setLobby " + args[1]);
@@ -27,8 +27,8 @@ public class CheckMessage {
 			}else{
 				Server.reply(socket, "joinLobbyFailed");
 			}
-		}
-			
+			Server.sendToAll(LobbysToSendString());
+		}	
 	}
 
 	public static ArrayList<Socket> getUserFromLobby(String lobby){
@@ -91,9 +91,10 @@ public class CheckMessage {
 		if(UsersInLobby.size() < 1)
 			disbandLobby(theUsersLobby);
 		else{
+			Lobbys.remove(theUsersLobby);
 			Lobbys.put(theUsersLobby, UsersInLobby);
-			Server.sendToAll(LobbysToSendString());
 		}
+		Server.sendToAll(LobbysToSendString());
 		return true;
 	}
 	
