@@ -28,7 +28,9 @@ public class CheckMessage {
 				Server.reply(socket, "joinLobbyFailed");
 			}
 			Server.sendToAll(LobbysToSendString());
-		}	
+		}else if(FullMsg.startsWith("playerPos")){
+			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
+		}
 	}
 
 	public static ArrayList<Socket> getUserFromLobby(String lobby){

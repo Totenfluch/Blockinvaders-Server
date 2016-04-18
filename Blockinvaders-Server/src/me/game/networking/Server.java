@@ -82,6 +82,15 @@ public class Server implements Runnable
 			}
 		}
 	}
+	
+	public static void sendToAllUsersInLobbyBut(String lobby, String message, Socket excempt){
+		ArrayList<Socket> UsersInLobby = CheckMessage.getUserFromLobby(lobby);
+		for(Socket s : UsersInLobby){
+			if(s != excempt){
+				Server.reply(s, message);
+			}
+		}
+	}
 
 	void removeConnection( Socket s ) {
 		synchronized( outputStreams ) {
