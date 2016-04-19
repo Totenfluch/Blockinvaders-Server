@@ -27,6 +27,8 @@ public class ServerThread implements Runnable
 					CheckMessage.ParseMessage(socket, Args, message);
 				}
 			}
+		} catch( SocketException ie){
+			System.out.println(socket + " disconnected");
 		} catch( EOFException ie ) {
 		} catch( IOException ie ) {
 			ie.printStackTrace();
