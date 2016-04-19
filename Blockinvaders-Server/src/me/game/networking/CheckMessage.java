@@ -72,7 +72,7 @@ public class CheckMessage {
 	public static boolean addUserToLobby(String lobby, Socket Player) {
 		if (Lobbys.containsKey(lobby)) {
 			if (Lobbys.get(lobby).size() < 2) {
-				if(Lobbys.get(lobby).contains(Player)){
+				if(!Lobbys.get(lobby).contains(Player)){
 					removeUserFromLobbys(Player);
 					
 					ArrayList<Socket> newStuff = new ArrayList<Socket>();
