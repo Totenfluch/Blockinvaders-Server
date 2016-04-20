@@ -11,8 +11,11 @@ public class CheckMessage {
 	public static Hashtable<String, ArrayList<Socket>> Lobbys = new Hashtable<String, ArrayList<Socket>>();
 
 	public static void ParseMessage(Socket socket, String[] args, String FullMsg) {
+		System.out.println(FullMsg);
 		if (FullMsg.startsWith("createLobby") && args.length > 1) {
-			if (CreateLobby(args[1], socket)) {
+			boolean isCreated = CreateLobby(args[1], socket);
+			if (isCreated) {
+				System.out.println("Set lobby of " + socket + " to " + args[1]);
 				Server.reply(socket, "setLobby " + args[1]);
 			} else {
 				Server.reply(socket, "setLobbyFailed");

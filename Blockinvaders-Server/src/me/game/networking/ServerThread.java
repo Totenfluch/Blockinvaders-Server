@@ -21,11 +21,7 @@ public class ServerThread implements Runnable
 			while (true) {
 				String message = din.readUTF();
 				String Args[] = message.split(" ");
-				if(Args.length < 1){
-
-				}else{
-					CheckMessage.ParseMessage(socket, Args, message);
-				}
+				CheckMessage.ParseMessage(socket, Args, message);
 			}
 		} catch( SocketException ie){
 			System.out.println(socket + " disconnected");
@@ -33,6 +29,12 @@ public class ServerThread implements Runnable
 		} catch( IOException ie ) {
 			ie.printStackTrace();
 		} finally {
+			try{
+				CheckMessage.removeUserFromLobbys(socket);
+			}catch(Exception e){};
+			if(CheckMessage.Usernames.containsKey(socket)){
+				CheckMessage.Usernames.remove(socket);
+			}
 			server.removeConnection( socket );
 		}
 	}
