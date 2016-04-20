@@ -36,10 +36,10 @@ public class Server implements Runnable
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			Server.reply(s, CheckMessage.LobbysToSendString());
 
 			outputStreams.put( s, dout );
-
+			Server.reply(s, CheckMessage.LobbysToSendString());
+			
 	        Thread n = new Thread(new ServerThread(this, s));
 	        n.start();
 		}

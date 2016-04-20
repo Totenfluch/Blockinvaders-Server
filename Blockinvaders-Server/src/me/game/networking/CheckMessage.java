@@ -11,10 +11,9 @@ public class CheckMessage {
 	public static Hashtable<String, ArrayList<Socket>> Lobbys = new Hashtable<String, ArrayList<Socket>>();
 
 	public static void ParseMessage(Socket socket, String[] args, String FullMsg) {
-		System.out.println(FullMsg);
+		//System.out.println(FullMsg);
 		if (FullMsg.startsWith("createLobby") && args.length > 1) {
-			boolean isCreated = CreateLobby(args[1], socket);
-			if (isCreated) {
+			if (CreateLobby(args[1], socket)) {
 				System.out.println("Set lobby of " + socket + " to " + args[1]);
 				Server.reply(socket, "setLobby " + args[1]);
 			} else {
@@ -138,10 +137,13 @@ public class CheckMessage {
 
 	public static String LobbysToSendString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("lobbys ");
+		sb.append("lobbys");
+		if(Lobbys.keySet().size() > 0)
+			sb.append(" ");
 		for (String Lobbynames : Lobbys.keySet()) {
 			sb.append(Lobbynames + "," + Lobbys.get(Lobbynames).size() + " ");
 		}
+		
 		return sb.toString();
 	}
 }
