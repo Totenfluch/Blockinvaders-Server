@@ -32,6 +32,8 @@ public class CheckMessage {
 			Server.sendToAll(LobbysToSendString());
 		} else if (FullMsg.startsWith("playerPos")) {
 			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
+		} else if (FullMsg.startsWith("shoot")){
+			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
 		}
 	}
 
