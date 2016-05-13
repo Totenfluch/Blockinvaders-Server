@@ -34,6 +34,14 @@ public class CheckMessage {
 			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
 		} else if (FullMsg.startsWith("shoot")){
 			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
+		} else if (FullMsg.startsWith("hitMonster")){
+			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
+		} else if (FullMsg.startsWith("hitPlayer")){
+			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
+		} else if (FullMsg.startsWith("playerDeath")){
+			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
+		} else if (FullMsg.startsWith("syncScore")){
+			Server.sendToAllUsersInLobbyBut(getLobbyFromSocket(socket), FullMsg, socket);
 		}
 	}
 
